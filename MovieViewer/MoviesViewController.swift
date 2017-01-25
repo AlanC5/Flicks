@@ -22,19 +22,19 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         // Do any additional setup after loading the view.
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let url = NSURL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
-        let request = NSURLRequest(URL: url!)
-        let session = NSURLSession(
-            configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
+        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
+        let request = URLRequest(url: url!)
+        let session = URLSession(
+            configuration: URLSessionConfiguration.default,
             delegate:nil,
-            delegateQueue:NSOperationQueue.mainQueue()
+            delegateQueue:OperationQueue.main
         )
         
-        let task: NSURLSessionDataTask = session.dataTaskWithRequest(request,
+        let task: URLSessionDataTask = session.dataTask(with: request,
             completionHandler: { (dataOrNil, response, error) in
             if let data = dataOrNil {
-                if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
-                    data, options:[]) as? NSDictionary {
+                if let responseDictionary = try! JSONSerialization.jsonObject(
+                    with: data, options:[]) as? NSDictionary {
                         NSLog("response: \(responseDictionary)")
                         
                         self.movies = responseDictionary["results"] as! [NSDictionary]
@@ -49,7 +49,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if let movies = movies {
             return movies.count
@@ -58,13 +58,16 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
         
         let movie = movies![indexPath.row]
         let title = movie["title"] as! String
+        let overview = movie["overview"] as! String
         
-        cell.textLabel!.text = title
+        cell.titleLabel.text = title
+        cell.overviewLabel.text = overview
+        
         print("row \(indexPath.row)")
         return cell
     }

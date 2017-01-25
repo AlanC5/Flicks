@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E79E1F0A1E3958C200324715 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79E1F091E3958C200324715 /* MovieCell.swift */; };
 		E7EE4FB91E36541E00AB0993 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EE4FB81E36541E00AB0993 /* AppDelegate.swift */; };
 		E7EE4FBE1E36541E00AB0993 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7EE4FBC1E36541E00AB0993 /* Main.storyboard */; };
 		E7EE4FC01E36541E00AB0993 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7EE4FBF1E36541E00AB0993 /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E79E1F091E3958C200324715 /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		E7EE4FB51E36541E00AB0993 /* MovieViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7EE4FB81E36541E00AB0993 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7EE4FBD1E36541E00AB0993 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -35,6 +37,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E79E1F081E39588A00324715 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E79E1F091E3958C200324715 /* MovieCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		E79E1F0B1E3958CC00324715 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E7EE4FCC1E3658C100AB0993 /* MoviesViewController.swift */,
+			);
+			name = "View Controller";
+			sourceTree = "<group>";
+		};
 		E7EE4FAC1E36541E00AB0993 = {
 			isa = PBXGroup;
 			children = (
@@ -54,12 +72,13 @@
 		E7EE4FB71E36541E00AB0993 /* MovieViewer */ = {
 			isa = PBXGroup;
 			children = (
+				E79E1F0B1E3958CC00324715 /* View Controller */,
+				E79E1F081E39588A00324715 /* Views */,
 				E7EE4FB81E36541E00AB0993 /* AppDelegate.swift */,
 				E7EE4FBC1E36541E00AB0993 /* Main.storyboard */,
 				E7EE4FBF1E36541E00AB0993 /* Assets.xcassets */,
 				E7EE4FC11E36541E00AB0993 /* LaunchScreen.storyboard */,
 				E7EE4FC41E36541E00AB0993 /* Info.plist */,
-				E7EE4FCC1E3658C100AB0993 /* MoviesViewController.swift */,
 			);
 			path = MovieViewer;
 			sourceTree = "<group>";
@@ -96,6 +115,8 @@
 				TargetAttributes = {
 					E7EE4FB41E36541E00AB0993 = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = TT39ETAXAZ;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};
@@ -137,6 +158,7 @@
 			files = (
 				E7EE4FB91E36541E00AB0993 /* AppDelegate.swift in Sources */,
 				E7EE4FCD1E3658C100AB0993 /* MoviesViewController.swift in Sources */,
+				E79E1F0A1E3958C200324715 /* MovieCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,10 +271,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = TT39ETAXAZ;
 				INFOPLIST_FILE = MovieViewer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CTW.com.MovieViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -260,10 +285,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = TT39ETAXAZ;
 				INFOPLIST_FILE = MovieViewer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CTW.com.MovieViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -286,6 +314,7 @@
 				E7EE4FC91E36541E00AB0993 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

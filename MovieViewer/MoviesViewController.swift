@@ -21,38 +21,24 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         tableView.dataSource = self
         tableView.delegate = self
+        // Initialize a UIRefreshControl
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for:  UIControlEvents.valueChanged)
         
+        // add refresh control to table view
+        tableView.insertSubview(refreshControl, at: 0)
+
         // Do any additional setup after loading the view.
-        let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
-        let request = URLRequest(url: url!)
-        let session = URLSession(
-            configuration: URLSessionConfiguration.default,
-            delegate:nil,
-            delegateQueue:OperationQueue.main
-        )
-        
-        // Display progress HUD
-        MBProgressHUD.showAdded(to: self.view, animated: true)
-        
-        let task: URLSessionDataTask = session.dataTask(with: request,
-            completionHandler: { (dataOrNil, response, error) in
-                
-            // Hide progress HUD
-            MBProgressHUD.hide(for: self.view, animated: true)
-                
-            if let data = dataOrNil {
-                if let responseDictionary = try! JSONSerialization.jsonObject(
-                    with: data, options:[]) as? NSDictionary {
-                        NSLog("response: \(responseDictionary)")
-                        
-                        self.movies = responseDictionary["results"] as! [NSDictionary]
-                        self.tableView.reloadData()
-                }
-            }
-        });
-        task.resume()
+       
+        getCurrentMovieData()
     }
+    
+    func refreshControlAction(_ refreshControl: UIRefreshControl) {
+        self.tableView.reloadData()
+        refreshControl.endRefreshing()
+        
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -86,7 +72,42 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         print("row \(indexPath.row)")
         return cell
     }
+    
+    func getCurrentMovieData() {
+        
+        let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
+        let request = URLRequest(url: url!)
+        let session = URLSession(
+            configuration: URLSessionConfiguration.default,
+            delegate:nil,
+            delegateQueue:OperationQueue.main
+        )
+        
+        // Display progress HUD
+        // MBProgressHUD.showAdded(to: self.view, animated: true)
+        
+        let task: URLSessionDataTask = session.dataTask(with: request,
+            completionHandler: { (dataOrNil, response, error) in
+            
+            // Hide progress HUD
+            // MBProgressHUD.hide(for: self.view, animated: true)
+            
+            if let data = dataOrNil {
+                if let responseDictionary = try! JSONSerialization.jsonObject(
+                    with: data, options:[]) as? NSDictionary {
+                    NSLog("response: \(responseDictionary)")
+                    
+                    self.movies = responseDictionary["results"] as! [NSDictionary]
+                    self.tableView.reloadData()
+                }
+            }
+        });
+        task.resume()
+    }
 
+    
+    
     /*
     // MARK: - Navigation
 
